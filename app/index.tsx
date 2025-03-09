@@ -10,6 +10,9 @@ export default function Index() {
       <Link href="/screens/login" className="text-blue-500">
         Go to Login
       </Link>
+      <Link href="/screens/testComponent" className="text-blue-500">
+        Go to TestComponent
+      </Link>
     </View>
   );
 }
