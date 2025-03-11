@@ -2,9 +2,9 @@ import { Card, Text } from "react-native-paper";
 import { TouchableOpacity, View } from "react-native";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 
-export default function CardSettings({ title, icone }) {
+export default function CardSettings({ title, icone, onPress }) {
   return (
-    <TouchableOpacity>
+    <TouchableOpacity onPress={onPress}>
       <Card>
         <Card.Content className="bg-white border-2 border-blue-500 rounded-lg">
           <View className="flex-row justify-between items-center">

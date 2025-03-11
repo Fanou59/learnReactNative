@@ -1,7 +1,10 @@
 import { View, Text, StyleSheet } from "react-native";
 import CardSettings from "../components/CardSettings";
+import { useRouter } from "expo-router";
 
-export default function Tab() {
+export default function Settings() {
+  const router = useRouter();
+
   return (
     <>
       <View className="w-full items center justify-center mb-11 mt-10">
@@ -10,10 +13,26 @@ export default function Tab() {
         </Text>
       </View>
       <View className="flex-1 px-5 gap-4">
-        <CardSettings title="General settings" icone="sliders" />
-        <CardSettings title="Lens settings" icone="eye" />
-        <CardSettings title="Contact us" icone="envelope" />
-        <CardSettings title="Log out" icone="sign-out" />
+        <CardSettings
+          title="General settings"
+          icone="sliders"
+          onPress={() => router.push("/screens/account")}
+        />
+        <CardSettings
+          title="Lens settings"
+          icone="eye"
+          onPress={() => router.push("/screens/lensSettings")}
+        />
+        <CardSettings
+          title="Contact us"
+          icone="envelope"
+          onPress={() => router.push("/screens/contactUs")}
+        />
+        <CardSettings
+          title="Log out"
+          icone="sign-out"
+          onPress={() => router.push("/screens/logOut")}
+        />
       </View>
     </>
   );
