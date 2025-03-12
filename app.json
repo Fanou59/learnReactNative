@@ -1,20 +1,24 @@
 {
   "expo": {
-    "name": "learnReactNative",
-    "slug": "learnReactNative",
+    "name": "Lens Mate",
+    "slug": "Lens Mate",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/Lens_Mate.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.anonymous.lensmate",
+      "icon": {
+        "dark": "./assets/images/Lens_Mate.png"
+      }
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "foregroundImage": "./assets/images/Lens_Mate.png",
+        "backgroundColor": "#2563EB"
       }
     },
     "web": {
@@ -27,10 +31,9 @@
       [
         "expo-splash-screen",
         {
-          "image": "./assets/images/splash-icon.png",
-          "imageWidth": 200,
-          "resizeMode": "contain",
-          "backgroundColor": "#ffffff"
+          "image": "./assets/images/splash-screen.png",
+          "resizeMode": "cover",
+          "backgroundColor": "#2563EB"
         }
       ]
     ],

@@ -1,8 +1,17 @@
 import * as React from "react";
 import { Text, View } from "react-native";
-import { IconButton } from "react-native-paper";
+import { Button, IconButton } from "react-native-paper";
+import { useState } from "react";
 
 export default function Index() {
+  const [days, setDays] = useState(0);
+
+  const handleClick = () => {
+    setDays(days + 1);
+  };
+  const handleReset = () => {
+    setDays(0);
+  };
   return (
     <View className="flex-1 gap-8">
       <View className="items-center mt-12">
@@ -22,11 +31,16 @@ export default function Index() {
           className="shadow-md"
           containerColor="#3b82f6"
           size={200}
-          onPress={() => console.log("Pressed")}
+          onPress={handleClick}
         />
         <Text className="font-nunito text-xl font-semibold tracking-widest uppercase">
-          23 jours
+          {days} jours
         </Text>
+      </View>
+      <View className="items-center self-center">
+        <Button buttonColor="#3b82f6" mode="contained" onPress={handleReset}>
+          Reset
+        </Button>
       </View>
     </View>
   );
