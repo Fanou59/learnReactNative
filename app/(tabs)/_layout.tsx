@@ -7,7 +7,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: "Home",
+          title: "Accueil",
           tabBarIcon: ({ color }) => (
             <FontAwesome size={28} name="home" color={color} />
           ),
@@ -16,16 +16,16 @@ export default function TabLayout() {
       <Tabs.Screen
         name="medicalInfo"
         options={{
-          title: "Medical Info",
+          title: "Info lentilles",
           tabBarIcon: ({ color }) => (
-            <FontAwesome size={28} name="medkit" color={color} />
+            <FontAwesome size={28} name="eye" color={color} />
           ),
         }}
       />
       <Tabs.Screen
         name="settings"
         options={{
-          title: "Settings",
+          title: "Paramètres",
           tabBarIcon: ({ color }) => (
             <FontAwesome size={28} name="cog" color={color} />
           ),

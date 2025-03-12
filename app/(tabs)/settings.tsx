@@ -14,22 +14,22 @@ export default function Settings() {
       </View>
       <View className="flex-1 px-5 gap-4">
         <CardSettings
-          title="General settings"
+          title="Votre compte"
           icone="sliders"
           onPress={() => router.push("/screens/account")}
         />
         <CardSettings
-          title="Lens settings"
+          title="Paramètres lentilles"
           icone="eye"
           onPress={() => router.push("/screens/lensSettings")}
         />
         <CardSettings
-          title="Contact us"
+          title="Contactez-nous"
           icone="envelope"
           onPress={() => router.push("/screens/contactUs")}
         />
         <CardSettings
-          title="Log out"
+          title="Déconnexion"
           icone="sign-out"
           onPress={() => router.push("/screens/logOut")}
         />
