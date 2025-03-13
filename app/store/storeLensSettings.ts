@@ -3,10 +3,10 @@ import { create } from "zustand";
 export interface AccountStateLens {
   marque: string;
   setMarque: (marque: string) => void;
-  diametre: number;
-  setDiametre: (diametre: number) => void;
-  rayon: number;
-  setRayon: (rayon: number) => void;
+  diametre: number | string;
+  setDiametre: (diametre: number | string) => void;
+  rayon: number | string;
+  setRayon: (rayon: number | string) => void;
   puissanceOG: number;
   setPuissanceOG: (puissanceOG: number) => void;
   cylindreOG: number;
