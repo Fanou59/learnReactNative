@@ -1,6 +1,6 @@
 import { TextInput } from "react-native";
 
-export default function Input({ placeholder }) {
+export default function Input({ placeholder, onChange, value }) {
   return (
     <TextInput
       className="w-full px-4 h-12 border border-gray-300 rounded-lg shadow-md text-base
@@ -11,6 +11,8 @@ export default function Input({ placeholder }) {
       type="text"
       autoCapitalize={placeholder === "Email" ? "none" : "sentences"}
       autoCorrect={placeholder === "Email" ? false : true}
+      onChange={onChange}
+      value={value}
     />
   );
 }

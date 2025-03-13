@@ -1,10 +1,14 @@
 import * as React from "react";
 import { Text, View } from "react-native";
 import { Button, IconButton } from "react-native-paper";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import useStore, { AccountState } from "../store";
 
 export default function Index() {
   const [days, setDays] = useState(0);
+  const prenom = useStore((state: AccountState) => state.prenom); // Utilise useStore
+  const setPrenom = useStore((state: AccountState) => state.setPrenom);
 
   const handleClick = () => {
     setDays(days + 1);
@@ -12,11 +16,44 @@ export default function Index() {
   const handleReset = () => {
     setDays(0);
   };
+
+  const getColor = (days: number) => {
+    if (days <= 0) {
+      return "white";
+    }
+    if (days > 31) {
+      return "red";
+    }
+
+    const startLightness = 100;
+    const endLightness = 50;
+
+    const lightness =
+      startLightness - (startLightness - endLightness) * (days / 31);
+
+    return `hsl(0, 100%, ${lightness}%)`;
+  };
+
+  useEffect(() => {
+    const getPrenom = async () => {
+      try {
+        const prenom = await AsyncStorage.getItem("prenom");
+        if (prenom) {
+          setPrenom(prenom);
+        }
+      } catch (error) {
+        console.error("Erreur lors de la récupération du prénom :", error);
+      }
+    };
+
+    getPrenom();
+  }, []);
+
   return (
     <View className="flex-1 gap-8">
       <View className="items-center mt-12">
         <Text className="text-slate-900 font-nunito tracking-widest text-4xl">
-          Bonjour John !
+          Bonjour {prenom} !
         </Text>
       </View>
       <View className="items-center w-full px-5 mt-16">
@@ -27,13 +64,16 @@ export default function Index() {
       <View className="items-center gap-2 mt-6">
         <IconButton
           icon="eye"
-          iconColor="white"
+          iconColor={getColor(days)}
           className="shadow-md"
           containerColor="#3b82f6"
           size={200}
           onPress={handleClick}
         />
-        <Text className="font-nunito text-xl font-semibold tracking-widest uppercase">
+        <Text
+          className="font-nunito text-xl font-semibold tracking-widest uppercase"
+          style={{ color: days >= 31 ? "red" : "" }}
+        >
           {days} jours
         </Text>
       </View>

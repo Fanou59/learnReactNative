@@ -1,8 +1,35 @@
-import { View, Text } from "react-native";
+import {
+  View,
+  Text,
+  NativeSyntheticEvent,
+  TextInputChangeEventData,
+} from "react-native";
 import Input from "../components/Input";
 import ButtonValidation from "../components/ButtonValidation";
+import { useState } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import useStore, { AccountState } from "../store";
+import { useRouter } from "expo-router";
 
 export default function Account() {
+  const [localPrenom, setLocalPrenom] = useState("");
+  const setPrenom = useStore((state: AccountState) => state.setPrenom);
+  const router = useRouter();
+
+  const handleChange = (e: NativeSyntheticEvent<TextInputChangeEventData>) => {
+    setLocalPrenom(e.nativeEvent.text);
+  };
+  const handleSubmit = async () => {
+    try {
+      await AsyncStorage.setItem("prenom", localPrenom);
+      setPrenom(localPrenom);
+      router.push("/");
+      return null;
+    } catch (error) {
+      console.error("Erreur lors de la sauvegarde du prénom :", error);
+    }
+  };
+
   return (
     <View className="flex-1">
       <View className="w-full items center justify-center mb-11 mt-10">
@@ -11,11 +38,17 @@ export default function Account() {
         </Text>
       </View>
       <View className="max-w-80 mx-auto w-11/12 gap-4 mb-6">
-        <Input placeholder={"Prénom"} />
+        <Input
+          placeholder={"Prénom"}
+          value={localPrenom}
+          onChange={handleChange}
+        />
       </View>
       <View className="max-w-80 mx-auto w-11/12 mb-10 gap-5">
-        <ButtonValidation>Valider</ButtonValidation>
-        <ButtonValidation danger={true}>Supprimer le compte</ButtonValidation>
+        <ButtonValidation onPress={handleSubmit}>Valider</ButtonValidation>
+        <ButtonValidation onPress={() => {}} danger={true}>
+          Supprimer le compte
+        </ButtonValidation>
       </View>
     </View>
   );
