@@ -6,15 +6,20 @@ import {
 } from "react-native";
 import Input from "../components/Input";
 import ButtonValidation from "../components/ButtonValidation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import useStore, { AccountState } from "../store";
+import useStore, { AccountState } from "../store/storeAccount";
 import { useRouter } from "expo-router";
 
 export default function Account() {
   const [localPrenom, setLocalPrenom] = useState("");
+  const prenom = useStore((state: AccountState) => state.prenom);
   const setPrenom = useStore((state: AccountState) => state.setPrenom);
   const router = useRouter();
+
+  useEffect(() => {
+    setLocalPrenom(prenom);
+  }, [prenom]);
 
   const handleChange = (e: NativeSyntheticEvent<TextInputChangeEventData>) => {
     setLocalPrenom(e.nativeEvent.text);

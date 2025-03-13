@@ -3,11 +3,11 @@ import { Text, View } from "react-native";
 import { Button, IconButton } from "react-native-paper";
 import { useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import useStore, { AccountState } from "../store";
+import useStore, { AccountState } from "../store/storeAccount";
 
 export default function Index() {
   const [days, setDays] = useState(0);
-  const prenom = useStore((state: AccountState) => state.prenom); // Utilise useStore
+  const prenom = useStore((state: AccountState) => state.prenom);
   const setPrenom = useStore((state: AccountState) => state.setPrenom);
 
   const handleClick = () => {

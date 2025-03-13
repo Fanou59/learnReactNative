@@ -1,7 +1,12 @@
 import { View, Text } from "react-native";
 import Info from "../components/Info";
+import useStore, { AccountStateLens } from "../store/storeLensSettings";
 
 export default function TestComponent() {
+  const marque = useStore((state: AccountStateLens) => state.marque);
+  const diametre = useStore((state: AccountStateLens) => state.diametre);
+  const rayon = useStore((state: AccountStateLens) => state.rayon);
+
   return (
     <View className="flex-1 items-center justify-center">
       <View className="w-full items center justify-center mb-11 mt-10">
@@ -12,9 +17,9 @@ export default function TestComponent() {
       <View className="flex-1 w-full px-4 gap-4">
         <Info
           title="Info générales"
-          info1="Marque : Acuvue"
-          info2="Diamètre : 14.50"
-          info3="Rayon : 8.70"
+          info1={`Marque : ${marque}`}
+          info2={`Diamètre : ${diametre}`}
+          info3={`Rayon : ${rayon}`}
         />
         <Info
           title="Oeil Droit"
