@@ -3,42 +3,42 @@ import { create } from "zustand";
 export interface AccountStateLens {
   marque: string;
   setMarque: (marque: string) => void;
-  diametre: number | string;
-  setDiametre: (diametre: number | string) => void;
-  rayon: number | string;
-  setRayon: (rayon: number | string) => void;
-  puissanceOG: number;
-  setPuissanceOG: (puissanceOG: number) => void;
-  cylindreOG: number;
-  setCylindreOG: (cylindreOG: number) => void;
-  axeOG: number;
-  setAxeOG: (axeOG: number) => void;
-  puissanceOD: number;
-  setPuissanceOD: (puissanceOD: number) => void;
-  cylindreOD: number;
-  setCylindreOD: (cylindreOD: number) => void;
-  axeOD: number;
-  setAxeOD: (axeOD: number) => void;
+  diametre: string;
+  setDiametre: (diametre: string) => void;
+  rayon: string;
+  setRayon: (rayon: string) => void;
+  puissanceOG: string;
+  setPuissanceOG: (puissanceOG: string) => void;
+  cylindreOG: string;
+  setCylindreOG: (cylindreOG: string) => void;
+  axeOG: string;
+  setAxeOG: (axeOG: string) => void;
+  puissanceOD: string;
+  setPuissanceOD: (puissanceOD: string) => void;
+  cylindreOD: string;
+  setCylindreOD: (cylindreOD: string) => void;
+  axeOD: string;
+  setAxeOD: (axeOD: string) => void;
 }
 
 const useAccountStore = create<AccountStateLens>((set) => ({
   marque: "",
   setMarque: (marque) => set({ marque }),
-  diametre: 0,
+  diametre: "",
   setDiametre: (diametre) => set({ diametre }),
-  rayon: 0,
+  rayon: "",
   setRayon: (rayon) => set({ rayon }),
-  puissanceOG: 0,
+  puissanceOG: "",
   setPuissanceOG: (puissanceOG) => set({ puissanceOG }),
-  cylindreOG: 0,
+  cylindreOG: "",
   setCylindreOG: (cylindreOG) => set({ cylindreOG }),
-  axeOG: 0,
+  axeOG: "",
   setAxeOG: (axeOG) => set({ axeOG }),
-  puissanceOD: 0,
+  puissanceOD: "",
   setPuissanceOD: (puissanceOD) => set({ puissanceOD }),
-  cylindreOD: 0,
+  cylindreOD: "",
   setCylindreOD: (cylindreOD) => set({ cylindreOD }),
-  axeOD: 0,
+  axeOD: "",
   setAxeOD: (axeOD) => set({ axeOD }),
 }));
 

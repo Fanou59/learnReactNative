@@ -8,6 +8,10 @@ export default function TestComponent() {
   const rayon = useStore((state: AccountStateLens) => state.rayon);
   const puissanceOG = useStore((state: AccountStateLens) => state.puissanceOG);
   const cylindreOG = useStore((state: AccountStateLens) => state.cylindreOG);
+  const axeOG = useStore((state: AccountStateLens) => state.axeOG);
+  const puissanceOD = useStore((state: AccountStateLens) => state.puissanceOD);
+  const cylindreOD = useStore((state: AccountStateLens) => state.cylindreOD);
+  const axeOD = useStore((state: AccountStateLens) => state.axeOD);
 
   return (
     <View className="flex-1 items-center justify-center">
@@ -27,13 +31,13 @@ export default function TestComponent() {
           title="Oeil Gauche"
           info1={`Puissance : ${puissanceOG}`}
           info2={`Cylindre : ${cylindreOG}`}
-          info3="Axe : 110°"
+          info3={`Axe : ${axeOG}`}
         />
         <Info
           title="Oeil Droit"
-          info1="Puissance : 0.00"
-          info2="Cylindre : -1.25"
-          info3="Axe : 30°"
+          info1={`Puissance : ${puissanceOD}`}
+          info2={`Cylindre : ${cylindreOD}`}
+          info3={`Axe : ${axeOD}`}
         />
       </View>
     </View>

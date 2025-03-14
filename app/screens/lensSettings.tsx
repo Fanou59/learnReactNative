@@ -14,63 +14,103 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function LensSettings() {
   const [localMarque, setLocalMarque] = useState("");
-  const [localDiametre, setLocalDiametre] = useState<string>("");
-  const [localRayon, setLocalRayon] = useState<string>("");
-  const [localPuissanceOG, setLocalPuissanceOG] = useState<string>("");
-  const [localCylindreOG, setLocalCylindreOG] = useState<string>("");
-  const marque = useStore((state: AccountStateLens) => state.marque);
+  const [localDiametre, setLocalDiametre] = useState("");
+  const [localRayon, setLocalRayon] = useState("");
+  const [localPuissanceOG, setLocalPuissanceOG] = useState("");
+  const [localPuissanceOD, setLocalPuissanceOD] = useState("");
+  const [localCylindreOG, setLocalCylindreOG] = useState("");
+  const [localCylindreOD, setLocalCylindreOD] = useState("");
+  const [localAxeOG, setLocalAxeOG] = useState("");
+  const [localAxeOD, setLocalAxeOD] = useState("");
+
   const setMarque = useStore((state: AccountStateLens) => state.setMarque);
-  const diametre = useStore((state: AccountStateLens) => state.diametre);
   const setDiametre = useStore((state: AccountStateLens) => state.setDiametre);
-  const rayon = useStore((state: AccountStateLens) => state.rayon);
   const setRayon = useStore((state: AccountStateLens) => state.setRayon);
-  const puissanceOG = useStore((state: AccountStateLens) => state.puissanceOG);
   const setPuissanceOG = useStore(
     (state: AccountStateLens) => state.setPuissanceOG
   );
-  const cylindreOG = useStore((state: AccountStateLens) => state.cylindreOG);
+  const setPuissanceOD = useStore(
+    (state: AccountStateLens) => state.setPuissanceOD
+  );
   const setCylindreOG = useStore(
     (state: AccountStateLens) => state.setCylindreOG
   );
+  const setCylindreOD = useStore(
+    (state: AccountStateLens) => state.setCylindreOD
+  );
+  const setAxeOG = useStore((state: AccountStateLens) => state.setAxeOG);
+  const setAxeOD = useStore((state: AccountStateLens) => state.setAxeOD);
+
   const router = useRouter();
 
-  useEffect(() => {
-    setLocalMarque(marque);
-    setLocalDiametre(String(diametre));
-    setLocalRayon(String(rayon));
-    setLocalPuissanceOG(String(puissanceOG));
-    setLocalCylindreOG(String(cylindreOG));
-  }, []);
-
-  const handleChangeMarque = (
-    e: NativeSyntheticEvent<TextInputChangeEventData>
+  const loadDataFromStorage = async (
+    key: string,
+    setState: (value: string) => void
   ) => {
-    setLocalMarque(e.nativeEvent.text);
-  };
-  const handleNumericChange = (
-    e: NativeSyntheticEvent<TextInputChangeEventData>,
-    setLocalValue: (value: string) => void,
-    setGlobalValue: (value: number) => void
-  ) => {
-    const inputValue = e.nativeEvent.text;
-    setLocalValue(inputValue);
-    const numericValue = parseFloat(inputValue.replace(",", "."));
-
-    if (!isNaN(numericValue)) {
-      setGlobalValue(numericValue);
-    } else if (inputValue === "") {
-      setGlobalValue(0);
-    } else {
-      console.warn("Invalid input");
+    try {
+      const storedValue = await AsyncStorage.getItem(key);
+      if (storedValue !== null) {
+        setState(storedValue);
+      }
+    } catch (error) {
+      console.error(`Erreur lors du chargement de ${key}:`, error);
     }
   };
+
+  useEffect(() => {
+    const loadAllData = async () => {
+      await loadDataFromStorage("marque", setLocalMarque);
+      await loadDataFromStorage("diametre", setLocalDiametre);
+      await loadDataFromStorage("rayon", setLocalRayon);
+      await loadDataFromStorage("puissanceOG", setLocalPuissanceOG);
+      await loadDataFromStorage("cylindreOG", setLocalCylindreOG);
+      await loadDataFromStorage("axeOG", setLocalAxeOG);
+      await loadDataFromStorage("puissanceOD", setLocalPuissanceOD);
+      await loadDataFromStorage("cylindreOD", setLocalCylindreOD);
+      await loadDataFromStorage("axeOD", setLocalAxeOD);
+    };
+
+    loadAllData();
+  }, []);
+
+  const handleChange =
+    (setState: (value: string) => void) =>
+    (e: NativeSyntheticEvent<TextInputChangeEventData>) => {
+      setState(e.nativeEvent.text);
+    };
+
+  const handleChangeMarque = handleChange(setLocalMarque);
+  const handleChangeDiametre = handleChange(setLocalDiametre);
+  const handleChangeRayon = handleChange(setLocalRayon);
+  const handleChangePuissanceOG = handleChange(setLocalPuissanceOG);
+  const handleChangeCylindreOG = handleChange(setLocalCylindreOG);
+  const handleChangeAxeOG = handleChange(setLocalAxeOG);
+  const handleChangePuissanceOD = handleChange(setLocalPuissanceOD);
+  const handleChangeCylindreOD = handleChange(setLocalCylindreOD);
+  const handleChangeAxeOD = handleChange(setLocalAxeOD);
 
   const handleSubmit = async () => {
     try {
       await AsyncStorage.setItem("marque", localMarque);
+      await AsyncStorage.setItem("diametre", localDiametre);
+      await AsyncStorage.setItem("rayon", localRayon);
+      await AsyncStorage.setItem("puissanceOG", localPuissanceOG);
+      await AsyncStorage.setItem("cylindreOG", localCylindreOG);
+      await AsyncStorage.setItem("axeOG", localAxeOG);
+      await AsyncStorage.setItem("puissanceOD", localPuissanceOD);
+      await AsyncStorage.setItem("cylindreOD", localCylindreOD);
+      await AsyncStorage.setItem("axeOD", localAxeOD);
+
       setMarque(localMarque);
       setDiametre(localDiametre);
       setRayon(localRayon);
+      setPuissanceOG(localPuissanceOG);
+      setCylindreOG(localCylindreOG);
+      setAxeOG(localAxeOG);
+      setPuissanceOD(localPuissanceOD);
+      setCylindreOD(localCylindreOD);
+      setAxeOD(localAxeOD);
+
       router.push("/(tabs)/medicalInfo");
       return null;
     } catch (error) {
@@ -90,26 +130,23 @@ export default function LensSettings() {
           placeholder={"Marque"}
           onChange={handleChangeMarque}
           value={localMarque}
+          inputMode="text"
         />
       </View>
       <View className="flex-row w-1/3 mx-auto justify-center gap-3 mb-10">
         <Input
           placeholder={"Diamètre"}
-          onChange={(e: NativeSyntheticEvent<TextInputChangeEventData>) =>
-            handleNumericChange(e, setLocalDiametre, setDiametre)
-          }
-          value={String(localDiametre)}
-          keyboardType="decimal-pad"
+          onChange={handleChangeDiametre}
+          value={localDiametre}
+          inputMode="decimal"
           dataType="decimal"
         />
 
         <Input
           placeholder={"Rayon"}
-          onChange={(e: NativeSyntheticEvent<TextInputChangeEventData>) =>
-            handleNumericChange(e, setLocalRayon, setRayon)
-          }
-          value={String(localRayon)}
-          keyboardType="decimal-pad"
+          onChange={handleChangeRayon}
+          value={localRayon}
+          inputMode="decimal"
           dataType="decimal"
         />
       </View>
@@ -118,29 +155,49 @@ export default function LensSettings() {
           <Text className="font-nunito font-bold text-xl">OG</Text>
           <Input
             placeholder={"Puissance"}
-            onChange={(e: NativeSyntheticEvent<TextInputChangeEventData>) =>
-              handleNumericChange(e, setLocalPuissanceOG, setPuissanceOG)
-            }
-            value={String(localPuissanceOG)}
-            keyboardType="decimal-pad"
+            onChange={handleChangePuissanceOG}
+            value={localPuissanceOG}
+            inputMode="decimal"
             dataType="decimal"
           />
           <Input
             placeholder={"Cylindre"}
-            onChange={(e: NativeSyntheticEvent<TextInputChangeEventData>) =>
-              handleNumericChange(e, setLocalCylindreOG, setCylindreOG)
-            }
-            value={String(localCylindreOG)}
-            keyboardType="decimal-pad"
+            onChange={handleChangeCylindreOG}
+            value={localCylindreOG}
+            inputMode="decimal"
             dataType="decimal"
           />
-          <Input placeholder={"Axe"} onChange={() => {}} value={""} />
+          <Input
+            placeholder={"Axe"}
+            onChange={handleChangeAxeOG}
+            value={localAxeOG}
+            inputMode="decimal"
+            dataType="decimal"
+          />
         </View>
         <View className="items-center w-full gap-3 mb-12">
           <Text className="font-nunito font-bold text-xl">OD</Text>
-          <Input placeholder={"Puissance"} onChange={() => {}} value={""} />
-          <Input placeholder={"Cylindre"} onChange={() => {}} value={""} />
-          <Input placeholder={"Axe"} onChange={() => {}} value={""} />
+          <Input
+            placeholder={"Puissance"}
+            onChange={handleChangePuissanceOD}
+            value={localPuissanceOD}
+            inputMode="decimal"
+            dataType="decimal"
+          />
+          <Input
+            placeholder={"Cylindre"}
+            onChange={handleChangeCylindreOD}
+            value={localCylindreOD}
+            inputMode="decimal"
+            dataType="decimal"
+          />
+          <Input
+            placeholder={"Axe"}
+            onChange={handleChangeAxeOD}
+            value={localAxeOD}
+            inputMode="decimal"
+            dataType="decimal"
+          />
         </View>
       </View>
       <View className="max-w-80 mx-auto w-11/12">
