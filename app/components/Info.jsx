@@ -12,7 +12,7 @@ export default function Info({ title, info1, info2, info3 }) {
       <Card.Content className="bg-white border-2 border-blue-500 rounded-lg">
         <View className="flex-row justify-between items-center">
           <View>
-            <Text className="mb-2 text-3xl" variant="titleLarge">
+            <Text className="mb-2 text-3xl" variant="titleMedium">
               {title}
             </Text>
             <Text className="text-sm" variant="bodyMedium">

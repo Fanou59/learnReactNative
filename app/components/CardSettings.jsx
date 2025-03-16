@@ -1,6 +1,6 @@
-import { Card, Text } from "react-native-paper";
-import { TouchableOpacity, View } from "react-native";
-import FontAwesome from "@expo/vector-icons/FontAwesome";
+import { Card, Text } from 'react-native-paper';
+import { TouchableOpacity, View } from 'react-native';
+import FontAwesome from '@expo/vector-icons/FontAwesome';
 
 export default function CardSettings({ title, icone, onPress }) {
   return (
@@ -10,7 +10,7 @@ export default function CardSettings({ title, icone, onPress }) {
           <View className="flex-row justify-between items-center">
             <View className="flex-row items-center">
               <FontAwesome name={icone} size={24} color="#3b82f6" />
-              <Text className="text-3xl ml-3" variant="titleLarge">
+              <Text className="ml-3" variant="titleMedium">
                 {title}
               </Text>
             </View>
