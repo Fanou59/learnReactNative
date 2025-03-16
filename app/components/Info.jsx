@@ -1,7 +1,12 @@
-import { Card, Text, Button } from "react-native-paper";
-import { View } from "react-native";
+import { Card, Text, Button } from 'react-native-paper';
+import { View } from 'react-native';
+import { useRouter } from 'expo-router';
 
 export default function Info({ title, info1, info2, info3 }) {
+  const router = useRouter();
+  const handleModifyPress = () => {
+    router.push('/screens/lensSettings');
+  };
   return (
     <Card>
       <Card.Content className="bg-white border-2 border-blue-500 rounded-lg">
@@ -22,7 +27,7 @@ export default function Info({ title, info1, info2, info3 }) {
             buttonColor="#3b82f6"
             icon="pencil"
             mode="contained"
-            onPress={() => console.log("Pressed")}
+            onPress={handleModifyPress}
           >
             Modify
           </Button>
